@@ -4,8 +4,20 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mariage – Julie Derobert & Franck Marion</title>
+  <meta name="description" content="Mariage de Julie Derobert & Franck Marion — date, lieu, RSVP, infos pratiques et hébergements." />
   <meta name="color-scheme" content="light" />
+  <!-- Canonical (à ajuster si tu prends un domaine custom) -->
+  <link rel="canonical" href="https://julie-franck-mariage.fr/">
+
+  <!-- Open Graph / partage -->
+  <meta property="og:title" content="Mariage – Julie & Franck">
+  <meta property="og:description" content="Toutes les infos : RSVP, accès, hébergements et photos.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://julie-franck-mariage.fr/">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80&auto=format&fit=crop">
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --bg:#f9f4ef;            /* fond doux */
@@ -110,7 +122,7 @@
       scroll-snap-type:x mandatory;
       -webkit-overflow-scrolling:touch;
       scroll-behavior:smooth;
-      padding:0;   /* pas de padding qui crée du vide */
+      padding:0;
     }
     .slider{
       display:flex;
@@ -121,7 +133,7 @@
     .slide{
       flex:0 0 auto;
       width: min(95vw, 1100px);
-      aspect-ratio: 21/9;       /* change en 16/9 si tu préfères */
+      aspect-ratio: 21/9; /* mets 16/9 si tu préfères */
       border-radius:18px;
       overflow:hidden;
       border:1px solid var(--border);
@@ -171,7 +183,7 @@
 </header>
 
 <main>
-  <!-- HERO + bannière -->
+  <!-- HERO -->
   <section class="hero" id="home">
     <div class="container hero-inner">
       <div class="sub">NOUS NOUS MARIONS</div>
@@ -188,7 +200,7 @@
         <div class="box"><div class="num" id="s">00</div><div class="lbl">Sec.</div></div>
       </div>
 
-      <!-- Sous le compteur : texte + bouton M'y rendre -->
+      <!-- Sous le compteur -->
       <div class="after-count">
         <span class="venue">au Château de la Reynerie</span>
         <a class="btn btn-primary" id="mapsBtn" target="_blank" rel="noreferrer">M’y rendre</a>
@@ -196,7 +208,7 @@
     </div>
   </section>
 
-  <!-- RSVP (centré) -->
+  <!-- RSVP -->
   <section id="rsvp">
     <div class="container container-narrow">
       <div class="section-title">
@@ -245,7 +257,7 @@
     </div>
   </section>
 
-  <!-- INFOS PRATIQUES (avant Hébergement) -->
+  <!-- INFOS PRATIQUES -->
   <section id="infos">
     <div class="container">
       <div class="section-title">
@@ -279,7 +291,7 @@
     </div>
   </section>
 
-  <!-- HEBERGEMENT (après Infos) -->
+  <!-- HÉBERGEMENT -->
   <section id="hebergement">
     <div class="container">
       <div class="section-title">
@@ -289,21 +301,25 @@
       <div class="grid grid-3">
         <div class="card">
           <strong>Hôtel du Parc</strong><br><small>8 min en voiture • Parking</small><br>
-          <a class="btn" style="margin-top:10px" href="https://www.google.com" target="_blank">Voir</a>
+          <a class="btn" style="margin-top:10px" href="https://www.google.com/maps" target="_blank">Voir</a>
         </div>
         <div class="card">
           <strong>Auberge des Fleurs</strong><br><small>12 min • Chambres familiales</small><br>
-          <a class="btn" style="margin-top:10px" href="https://www.google.com" target="_blank">Voir</a>
+          <a class="btn" style="margin-top:10px" href="https://www.google.com/maps" target="_blank">Voir</a>
         </div>
         <div class="card">
           <strong>B&B Centre</strong><br><small>18 min • Pratique gare</small><br>
-          <a class="btn" style="margin-top:10px" href="https://www.google.com" target="_blank">Voir</a>
+          <a class="btn" style="margin-top:10px" href="https://www.google.com/maps" target="_blank">Voir</a>
+        </div>
+        <div class="card">
+          <strong>B&B Centre</strong><br><small>18 min • Pratique gare</small><br>
+          <a class="btn" style="margin-top:10px" href="https://www.google.com/maps" target="_blank">Voir</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PHOTOS : slider 1 photo par vue -->
+  <!-- PHOTOS : slider -->
   <section id="photos">
     <div class="container">
       <div class="section-title">
@@ -315,7 +331,7 @@
     <div class="slider-zone">
       <div class="slider-wrap" id="sliderWrap">
         <div class="slider" id="slider">
-          <!-- HD pour éviter tout pixelisé -->
+          <!-- HD pour éviter le pixelisé -->
           <div class="slide"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1600&q=80&auto=format&fit=crop" alt="Ambiance 1"></div>
           <div class="slide"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80&auto=format&fit=crop" alt="Ambiance 2"></div>
           <div class="slide"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1600&q=80&auto=format&fit=crop" alt="Ambiance 3"></div>
@@ -339,7 +355,7 @@
   // ====== CONFIG ======
   const CONFIG = {
     couple: { bride: "Julie Derobert", groom: "Franck Marion" },
-    dateISO: "2025-04-12T14:30:00+02:00",
+    dateISO: "2026-04-25T14:30:00+02:00",
     location: {
       venue: "Château de la Reynerie",
       address: "Adresse exacte à renseigner",
@@ -380,23 +396,84 @@
   document.getElementById("footerTxt").textContent = `${CONFIG.location.venue} • ${CONFIG.location.address}`;
 
   // Countdown
-  const elCount = document.getElementById("countdown");
-  const d=document.getElementById("d"), h=document.getElementById("h"), m=document.getElementById("m"), s=document.getElementById("s");
-  function tick(){
-    const now = new Date().getTime();
-    const target = new Date(CONFIG.dateISO).getTime();
-    const total = Math.max(0, target - now);
-    const dd = Math.floor(total/(1000*60*60*24));
-    const hh = Math.floor((total/(1000*60*60))%24);
-    const mm = Math.floor((total/(1000*60))%60);
-    const ss = Math.floor((total/1000)%60);
-    d.textContent = String(dd).padStart(2,"0");
-    h.textContent = String(hh).padStart(2,"0");
-    m.textContent = String(mm).padStart(2,"0");
-    s.textContent = String(ss).padStart(2,"0");
-    elCount.hidden = false;
+  /* ===== COMPTE À REBOURS FIABLE ===== */
+  // Essaie d'abord de parser l'ISO directement. Si échec (vieux navigateurs),
+  // on parse à la main (YYYY-MM-DDTHH:mm:ss±HH:mm)
+  function parseDateISO(iso) {
+    const d = new Date(iso);
+    if (!isNaN(d)) return d;
+
+    // Fallback manuel
+    const m = iso.match(
+      /^(\d{4})-(\d{2})-(\d{2})[T\s](\d{2}):(\d{2})(?::(\d{2}))?([+-]\d{2}:\d{2}|Z)?$/
+    );
+    if (!m) return new Date(); // fallback now
+
+    const [ , Y, M, D, h, min, s = "00", tz = "Z"] = m;
+    // Construire une date en UTC puis appliquer l'offset
+    const base = Date.UTC(+Y, +M - 1, +D, +h, +min, +s);
+    if (tz === "Z" || !tz) return new Date(base);
+
+    const sign = tz.startsWith("-") ? -1 : 1;
+    const [th, tm] = tz.slice(1).split(":").map(Number);
+    const offsetMs = sign * (th * 60 + tm) * 60 * 1000;
+    return new Date(base - offsetMs);
   }
-  tick(); setInterval(tick,1000);
+
+  const elCount = document.getElementById("countdown");
+  const d = document.getElementById("d");
+  const h = document.getElementById("h");
+  const m = document.getElementById("m");
+  const s = document.getElementById("s");
+
+  // Optionnel: message le jour J
+  const afterCountContainer = document.querySelector(".after-count");
+  let celebrationMsgEl = document.getElementById("celebrationMsg");
+  if (!celebrationMsgEl) {
+    celebrationMsgEl = document.createElement("span");
+    celebrationMsgEl.id = "celebrationMsg";
+    celebrationMsgEl.style.fontWeight = "600";
+    celebrationMsgEl.style.display = "none";
+    celebrationMsgEl.textContent = "🎉 C’est le grand jour !";
+    afterCountContainer?.prepend(celebrationMsgEl);
+  }
+
+  const TARGET = parseDateISO(CONFIG.dateISO);
+
+  function two(n){ return String(n).padStart(2,"0"); }
+
+  function tick() {
+    const now = Date.now();
+    const total = TARGET.getTime() - now;
+
+    // Affiche le bloc (au cas où)
+    elCount.hidden = false;
+
+    if (total <= 0) {
+      d.textContent = "00";
+      h.textContent = "00";
+      m.textContent = "00";
+      s.textContent = "00";
+      celebrationMsgEl.style.display = "inline";
+      clearInterval(timer);
+      return;
+    }
+
+    const days = Math.floor(total / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+    const mins  = Math.floor((total / (1000 * 60)) % 60);
+    const secs  = Math.floor((total / 1000) % 60);
+
+    d.textContent = two(days);
+    h.textContent = two(hours);
+    m.textContent = two(mins);
+    s.textContent = two(secs);
+  }
+
+  // Premier affichage + intervalle régulier
+  tick();
+  const timer = setInterval(tick, 1000);
+
 
   // RSVP (mailto)
   const form = document.getElementById("rsvpForm");
