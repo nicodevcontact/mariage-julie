@@ -6,41 +6,68 @@
   <title>Mariage – Julie Derobert & Franck Marion</title>
   <meta name="description" content="Mariage de Julie Derobert & Franck Marion — date, lieu, RSVP, infos pratiques et hébergements." />
   <meta name="color-scheme" content="light" />
-  <!-- Canonical (à ajuster si tu prends un domaine custom) -->
-  <link rel="canonical" href="https://julie-franck-mariage.fr/">
 
-  <!-- Open Graph / partage -->
+  <!-- Open Graph -->
   <meta property="og:title" content="Mariage – Julie & Franck">
   <meta property="og:description" content="Toutes les infos : RSVP, accès, hébergements et photos.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://julie-franck-mariage.fr/">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80&auto=format&fit=crop">
+  <meta property="og:image" content="img/chateau.jpg">
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Arapey:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#f9f4ef;            /* fond doux */
-      --panel:#ffffff;         /* cartes */
-      --fg:#463a37;            /* texte */
-      --muted:#8a7a76;         /* texte secondaire */
-      --border:#f0e2db;        /* bordures */
+      --bg:#f9f4ef;
+      --panel:#ffffff;
+      --fg:#463a37;
+      --muted:#8a7a76;
+      --border:#f0e2db;
       --primary:#ffbf47;       /* doré */
-      --primary-strong:#e6ab40;
+      --primary-strong:#e6ab40; /* doré foncé */
       --shadow: 0 10px 25px rgba(0,0,0,.06);
       --shadow-soft: 0 6px 16px rgba(0,0,0,.05);
     }
 
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font:16px/1.55 "Inter",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+    html,body{
+      margin:0;padding:0;background:var(--bg);color:var(--fg);
+      font:16px/1.6 "Arapey", Georgia, serif; letter-spacing:.02em;
+    }
     html{scroll-behavior:smooth}
     img{max-width:100%;display:block}
     a{color:inherit;text-decoration:none}
     .container{max-width:1100px;margin:auto;padding:0 20px}
 
+    /* Header */
+    header{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:saturate(1.1) blur(8px);
+      background:rgba(249,244,239,.92);
+      border-bottom:1px solid var(--border);
+      transition:box-shadow .25s ease, background-color .25s ease;
+    }
+    header.scrolled{box-shadow:0 6px 18px rgba(0,0,0,.06);background:rgba(249,244,239,.97)}
+    nav{display:flex;align-items:center;justify-content:space-between;height:60px}
+    .brand{font: 36px/1 "Great Vibes", cursive; color:var(--primary); white-space:nowrap}
+    .nav-links{display:flex;gap:18px;align-items:center}
+    .nav-links a{padding:.3rem .1rem;font-weight:700;letter-spacing:.03em}
+    .hamb{display:none;border:0;background:transparent;font-size:28px;line-height:1;cursor:pointer}
+    .hamb[aria-expanded="true"]{transform:rotate(90deg)}
+    @media (max-width:860px){
+      .hamb{display:block}
+      .nav-links{
+        position:absolute;left:0;right:0;top:60px;display:none;flex-direction:column;
+        gap:12px;padding:12px 20px;background:rgba(249,244,239,.98);
+        border-bottom:1px solid var(--border);
+      }
+      .nav-open .nav-links{display:flex}
+    }
+
+    /* Boutons */
     .btn{
-      position:relative;display:inline-block;padding:.75rem 1rem;border-radius:999px;
-      border:1px solid var(--border);font-weight:600;background:var(--panel);
+      position:relative;display:inline-block;padding:.8rem 1.1rem;border-radius:999px;
+      border:1px solid var(--border);font-weight:700;background:var(--panel);
       transition:transform .25s ease, box-shadow .25s ease, background-color .25s ease, border-color .25s ease;
       will-change:transform;
     }
@@ -52,108 +79,87 @@
       border:1px solid var(--border);border-radius:18px;padding:18px;background:var(--panel);
       box-shadow:var(--shadow);backdrop-filter:saturate(1.05);
       transition:transform .25s ease, box-shadow .25s ease;
-      will-change:transform;
     }
     .card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.08)}
 
-    header{
-      position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.1) blur(8px);
-      background:rgba(249,244,239,.85);border-bottom:1px solid var(--border);
-      transition:box-shadow .25s ease, background-color .25s ease;
-    }
-    header.scrolled{box-shadow:0 6px 18px rgba(0,0,0,.06);background:rgba(249,244,239,.95)}
-    nav{display:flex;align-items:center;justify-content:space-between;height:60px}
-    nav .brand{font:700 18px/1 "Playfair Display",serif;color:var(--primary)}
-    .nav-links{display:flex;gap:18px;align-items:center}
-    .nav-links a{padding:.3rem .1rem}
-    .hamb{display:none}
-    @media (max-width:860px){
-      .hamb{display:block;border:0;background:transparent;font-size:26px}
-      .nav-links{display:none}
-      .nav-open .nav-links{display:flex;flex-direction:column;gap:12px;padding:12px 0}
-    }
-
-    /* HERO : bannière + overlay pour contraste */
+    /* HERO avec overlay + plaque titre */
     .hero{
-      position:relative;overflow:hidden;color:#2b221f;
-      min-height:58vh;display:flex;align-items:center;
+      position:relative;overflow:hidden;min-height:58vh;display:flex;align-items:center;justify-content:center;text-align:center;
+      background: url("img/chateau.jpg") center/cover no-repeat;
+      color:#fff;
+    }
+    /* Overlay */
+    .hero::before{
+      content:"";position:absolute;inset:0;z-index:0;
       background:
-        linear-gradient(to bottom, rgba(0,0,0,.18), rgba(0,0,0,.08) 35%, rgba(249,244,239,.85) 80%),
-        url("https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?w=1600&q=80&auto=format&fit=crop") center/cover no-repeat;
+        radial-gradient(60% 50% at 50% 38%, rgba(0,0,0,.28) 0%, rgba(0,0,0,.14) 60%, transparent 100%),
+        linear-gradient(to bottom, rgba(0,0,0,.35) 0%, rgba(0,0,0,.20) 35%, rgba(249,244,239,.88) 100%);
     }
-    .hero-inner{width:100%;text-align:center;padding:80px 0 36px}
-    h1{
-      font:700 clamp(30px,6.2vw,58px)/1.08 "Playfair Display",serif;
-      margin:0 0 12px;color:var(--primary);position:relative;display:inline-block;
-    }
-    h1::after{
-      content:"";display:block;height:2px;width:120px;background:var(--primary);
-      margin:10px auto 0;border-radius:999px;
-    }
-    h2{font:600 clamp(22px,3.2vw,28px)/1.2 "Playfair Display",serif;color:var(--primary);margin:0 0 6px}
-    .sub{color:#efe7e4;text-transform:uppercase;letter-spacing:.22em;font-size:.78rem;opacity:.95}
+    .hero-inner{position:relative;z-index:1;padding:86px 0 36px}
 
-    /* Lignes info date/heure/lieu (style blog) */
-    .event-lines{margin-top:12px;color:#fff;mix-blend:normal;text-shadow:0 1px 2px rgba(0,0,0,.18)}
-    .event-lines .line{margin:4px 0}
-    .event-lines .label{font-weight:600;color:#fff}
+    /* PLAQUE allégée */
+    .title-plaque{
+      display:inline-block;
+      background:rgba(0,0,0,.16);
+      border:1px solid rgba(255,255,255,.28);
+      backdrop-filter: blur(8px);
+      padding:18px 22px;border-radius:18px;
+      box-shadow: 0 14px 30px rgba(0,0,0,.22), inset 0 0 6px rgba(255,255,255,.04);
+    }
 
-    /* Countdown + bloc sous le compteur */
+    /* Badge doré pour "Nous nous marions" */
+    .sub{
+      display:inline-block;margin-bottom:10px;padding:.2rem .6rem;border-radius:999px;
+      font-size:.82rem;letter-spacing:.22em;text-transform:uppercase;
+      color:var(--primary-strong);
+      background:rgba(255,191,71,.18);
+      border:1px solid rgba(255,191,71,.40);
+      box-shadow:0 1px 6px rgba(0,0,0,.15);
+    }
+
+    /* Noms en doré */
+    .names{
+      font: clamp(42px, 6.8vw, 88px) / 1.05 "Great Vibes", cursive;
+      margin:6px 0 0 0; color:var(--primary);
+      text-shadow: 0 10px 22px rgba(0,0,0,.45), 0 2px 8px rgba(0,0,0,.45);
+      -webkit-text-stroke: .3px rgba(0,0,0,.20);
+    }
+
+    /* Cartouche infos */
+    .event-lines{
+      display:inline-block;margin-top:12px;padding:.55rem .85rem;border-radius:12px;
+      background: rgba(0,0,0,.18);
+      color:#fff; backdrop-filter: blur(3px);
+      text-shadow: 0 2px 6px rgba(0,0,0,.5);
+      border:1px solid rgba(255,255,255,.22);
+    }
+    .event-lines .line + .line{
+      margin-top:.35rem;padding-top:.35rem;border-top:1px solid rgba(255,255,255,.18);
+    }
+
+    /* Countdown */
     .countdown{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;max-width:540px;margin:22px auto 8px}
-    .box{border:1px solid var(--border);border-radius:16px;padding:14px;text-align:center;background:var(--panel)}
-    .num{font-variant-numeric:tabular-nums;letter-spacing:.02em;font-size:1.7rem;font-weight:700}
-    .lbl{font-size:.78rem;color:var(--muted);margin-top:4px}
+    .box{border:1px solid var(--border);border-radius:16px;padding:14px;text-align:center;background:rgba(255,255,255,.95);box-shadow:0 8px 22px rgba(0,0,0,.10)}
+    .num{font-variant-numeric:tabular-nums;letter-spacing:.02em;font-size:1.7rem;font-weight:700;color:#2b221f}
+    .lbl{font-size:.78rem;color:#6d5d59;margin-top:4px}
     .after-count{margin-top:10px;display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap}
-    .venue{font-weight:600}
+    .venue{font-weight:700;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.6)}
 
     section{padding:56px 0}
     .section-title{text-align:center;margin-bottom:16px}
-
-    /* RSVP centré */
     #rsvp .container-narrow{max-width:680px;margin:0 auto}
 
     .grid{display:grid;gap:16px}
     @media (min-width:900px){ .grid-3{grid-template-columns:repeat(3,1fr)} .grid-2{grid-template-columns:repeat(2,1fr)} }
 
-    /* === SLIDER : 1 photo par écran, centrée === */
+    /* Slider */
     .slider-zone{position:relative}
-    .slider-wrap{
-      overflow:auto;
-      scroll-snap-type:x mandatory;
-      -webkit-overflow-scrolling:touch;
-      scroll-behavior:smooth;
-      padding:0;
-    }
-    .slider{
-      display:flex;
-      gap:16px;
-      padding-bottom:6px;
-      justify-content:center;
-    }
-    .slide{
-      flex:0 0 auto;
-      width: min(95vw, 1100px);
-      aspect-ratio: 21/9; /* mets 16/9 si tu préfères */
-      border-radius:18px;
-      overflow:hidden;
-      border:1px solid var(--border);
-      background:var(--panel);
-      box-shadow:var(--shadow);
-      scroll-snap-align:center;
-    }
+    .slider-wrap{overflow:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;padding:0}
+    .slider{display:flex;gap:16px;padding-bottom:6px;justify-content:center}
+    .slide{flex:0 0 auto;width:min(95vw,1100px);aspect-ratio:21/9;border-radius:18px;overflow:hidden;border:1px solid var(--border);background:var(--panel);box-shadow:var(--shadow);scroll-snap-align:center}
     .slide img{width:100%;height:100%;object-fit:cover}
-
-    .slider-nav{
-      position:absolute;inset:0;pointer-events:none;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:0 10px;
-    }
-    .nav-btn{
-      pointer-events:auto;border:0;border-radius:999px;width:44px;height:44px;
-      font-size:20px;font-weight:700;background:var(--primary);color:#fff;
-      box-shadow:var(--shadow-soft);display:grid;place-items:center;cursor:pointer;
-      transition:transform .15s ease
-    }
+    .slider-nav{position:absolute;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:space-between;padding:0 10px}
+    .nav-btn{pointer-events:auto;border:0;border-radius:999px;width:44px;height:44px;font-size:20px;font-weight:700;background:var(--primary);color:#fff;box-shadow:var(--shadow-soft);display:grid;place-items:center;cursor:pointer;transition:transform .15s ease}
     .nav-btn:hover{transform:translateY(-1px)}
     .nav-btn:disabled{opacity:.35;cursor:not-allowed}
 
@@ -162,7 +168,7 @@
 
     input,textarea,select{width:100%;padding:.7rem .85rem;border:1px solid var(--border);border-radius:12px;background:transparent;color:inherit;transition:border-color .2s ease, box-shadow .2s ease}
     input:focus,textarea:focus,select:focus{outline:none;border-color:color-mix(in oklab, var(--primary) 35%, white);box-shadow:0 0 0 4px color-mix(in oklab, var(--primary) 18%, white)}
-    label{font-size:.86rem;color:var(--muted);display:block;margin:6px 0 2px}
+    label{font-size:.92rem;color:var(--muted);display:block;margin:6px 0 2px}
   </style>
 </head>
 <body>
@@ -170,8 +176,8 @@
 <header id="siteHeader">
   <div class="container">
     <nav>
-      <div class="brand" id="brand">Julie Derobert & Franck Marion</div>
-      <button class="hamb" aria-label="Menu" id="hamb">☰</button>
+      <div class="brand">Julie & Franck</div>
+      <button class="hamb" aria-label="Ouvrir le menu" aria-expanded="false" id="hamb">☰</button>
       <div class="nav-links" id="links">
         <a href="#rsvp">RSVP</a>
         <a href="#infos">Infos pratiques</a>
@@ -185,12 +191,14 @@
 <main>
   <!-- HERO -->
   <section class="hero" id="home">
-    <div class="container hero-inner">
-      <div class="sub">NOUS NOUS MARIONS</div>
-      <h1 id="title">Julie Derobert • Franck Marion</h1>
+    <div class="hero-inner">
+      <div class="title-plaque">
+        <div class="sub">NOUS NOUS MARIONS</div>
+        <h1 class="names">Julie Derobert &amp; Franck Marion</h1>
 
-      <!-- Date/heure en texte clair -->
-      <div class="event-lines" id="eventLines"></div>
+        <!-- Infos en clair -->
+        <div class="event-lines" id="eventLines"></div>
+      </div>
 
       <!-- COUNTDOWN -->
       <div class="countdown" id="countdown" hidden>
@@ -200,7 +208,6 @@
         <div class="box"><div class="num" id="s">00</div><div class="lbl">Sec.</div></div>
       </div>
 
-      <!-- Sous le compteur -->
       <div class="after-count">
         <span class="venue">au Château de la Reynerie</span>
         <a class="btn btn-primary" id="mapsBtn" target="_blank" rel="noreferrer">M’y rendre</a>
@@ -212,7 +219,7 @@
   <section id="rsvp">
     <div class="container container-narrow">
       <div class="section-title">
-        <h2>RSVP</h2>
+        <h2 style="font-family:'Great Vibes',cursive;font-size:42px;color:var(--primary);margin:0 0 6px">RSVP</h2>
         <div class="small" style="color:var(--muted)">Merci de confirmer avant le 15 mars</div>
       </div>
 
@@ -261,7 +268,7 @@
   <section id="infos">
     <div class="container">
       <div class="section-title">
-        <h2>Infos pratiques</h2>
+        <h2 style="font-family:'Great Vibes',cursive;font-size:42px;color:var(--primary);margin:0 0 6px">Infos pratiques</h2>
       </div>
       <div class="grid grid-3">
         <div class="card">
@@ -295,7 +302,7 @@
   <section id="hebergement">
     <div class="container">
       <div class="section-title">
-        <h2>Hébergement</h2>
+        <h2 style="font-family:'Great Vibes',cursive;font-size:42px;color:var(--primary);margin:0 0 6px">Hébergement</h2>
         <div class="small" style="color:var(--muted)">À proximité du lieu</div>
       </div>
       <div class="grid grid-3">
@@ -311,19 +318,15 @@
           <strong>B&B Centre</strong><br><small>18 min • Pratique gare</small><br>
           <a class="btn" style="margin-top:10px" href="https://www.google.com/maps" target="_blank">Voir</a>
         </div>
-        <div class="card">
-          <strong>B&B Centre</strong><br><small>18 min • Pratique gare</small><br>
-          <a class="btn" style="margin-top:10px" href="https://www.google.com/maps" target="_blank">Voir</a>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- PHOTOS : slider -->
+  <!-- PHOTOS : slider (Pexels) -->
   <section id="photos">
     <div class="container">
       <div class="section-title">
-        <h2>Photos</h2>
+        <h2 style="font-family:'Great Vibes',cursive;font-size:42px;color:var(--primary);margin:0 0 6px">Photos</h2>
         <div class="small" style="color:var(--muted)">Quelques images d’ambiance</div>
       </div>
     </div>
@@ -331,11 +334,12 @@
     <div class="slider-zone">
       <div class="slider-wrap" id="sliderWrap">
         <div class="slider" id="slider">
-          <!-- HD pour éviter le pixelisé -->
-          <div class="slide"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1600&q=80&auto=format&fit=crop" alt="Ambiance 1"></div>
-          <div class="slide"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80&auto=format&fit=crop" alt="Ambiance 2"></div>
-          <div class="slide"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1600&q=80&auto=format&fit=crop" alt="Ambiance 3"></div>
-          <div class="slide"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1600&q=80&auto=format&fit=crop" alt="Ambiance 4"></div>
+          <div class="slide"><img src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Cérémonie en extérieur"></div>
+          <div class="slide"><img src="https://images.pexels.com/photos/265920/pexels-photo-265920.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Bouquet lumière dorée"></div>
+          <div class="slide"><img src="https://images.pexels.com/photos/265947/pexels-photo-265947.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Alliances et détails"></div>
+          <div class="slide"><img src="https://images.pexels.com/photos/341372/pexels-photo-341372.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Vin d'honneur"></div>
+          <div class="slide"><img src="https://images.pexels.com/photos/265940/pexels-photo-265940.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Préparatifs mariée"></div>
+          <div class="slide"><img src="https://www.crolles.fr/wp-content/uploads/2022/02/Mariage.jpeg" alt="Sortie des mariés"></div>
         </div>
       </div>
 
@@ -352,10 +356,11 @@
 </footer>
 
 <script>
-  // ====== CONFIG ======
+  // ===== CONFIG =====
   const CONFIG = {
     couple: { bride: "Julie Derobert", groom: "Franck Marion" },
-    dateISO: "2026-04-25T14:30:00+02:00",
+    // 1er août 2026 à 14:30 (CEST)
+    dateISO: "2026-08-01T14:30:00+02:00",
     location: {
       venue: "Château de la Reynerie",
       address: "Adresse exacte à renseigner",
@@ -365,26 +370,31 @@
     rsvp: { to: "contact@mariage-exemple.fr", subject: "RSVP – Mariage" },
   };
 
-  // Navbar shadow
+  // Header + burger
   const header = document.getElementById("siteHeader");
   const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 4);
   window.addEventListener("scroll", onScroll); onScroll();
 
-  // Mobile menu
   const hamb = document.getElementById("hamb");
-  hamb?.addEventListener("click",()=> document.body.classList.toggle("nav-open"));
+  const links = document.getElementById("links");
+  hamb?.addEventListener("click",()=>{
+    const open = document.body.classList.toggle("nav-open");
+    hamb.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  links?.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{
+    document.body.classList.remove("nav-open");
+    hamb.setAttribute("aria-expanded","false");
+  }));
 
-  // Remplissage textes
+  // Text inject
   const dateObj = new Date(CONFIG.dateISO);
   const dateLong = dateObj.toLocaleDateString("fr-FR",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
   const time = dateObj.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
-  document.getElementById("brand").textContent = `${CONFIG.couple.bride} & ${CONFIG.couple.groom}`;
-  document.getElementById("title").textContent = `${CONFIG.couple.bride} • ${CONFIG.couple.groom}`;
   const lines = document.getElementById("eventLines");
   lines.innerHTML = `
-    <div class="line"><span class="label">Date :</span> ${dateLong}</div>
-    <div class="line"><span class="label">Heure :</span> ${time}</div>
-    <div class="line"><span class="label">Lieu :</span> ${CONFIG.location.venue}</div>
+    <div class="line"><strong>Date :</strong> ${dateLong}</div>
+    <div class="line"><strong>Heure :</strong> ${time}</div>
+    <div class="line"><strong>Lieu :</strong> ${CONFIG.location.venue}</div>
   `;
   document.getElementById("mapsBtn").href = CONFIG.location.mapsUrl;
   document.getElementById("mapsBtn2").href = CONFIG.location.mapsUrl;
@@ -395,25 +405,15 @@
   if(mailtoLink){ mailtoLink.textContent = CONFIG.rsvp.to; mailtoLink.href = `mailto:${CONFIG.rsvp.to}`; }
   document.getElementById("footerTxt").textContent = `${CONFIG.location.venue} • ${CONFIG.location.address}`;
 
-  // Countdown
-  /* ===== COMPTE À REBOURS FIABLE ===== */
-  // Essaie d'abord de parser l'ISO directement. Si échec (vieux navigateurs),
-  // on parse à la main (YYYY-MM-DDTHH:mm:ss±HH:mm)
+  // ===== Countdown robuste =====
   function parseDateISO(iso) {
     const d = new Date(iso);
     if (!isNaN(d)) return d;
-
-    // Fallback manuel
-    const m = iso.match(
-      /^(\d{4})-(\d{2})-(\d{2})[T\s](\d{2}):(\d{2})(?::(\d{2}))?([+-]\d{2}:\d{2}|Z)?$/
-    );
-    if (!m) return new Date(); // fallback now
-
+    const m = iso.match(/^(\d{4})-(\d{2})-(\d{2})[T\s](\d{2}):(\d{2})(?::(\d{2}))?([+-]\d{2}:\d{2}|Z)?$/);
+    if (!m) return new Date();
     const [ , Y, M, D, h, min, s = "00", tz = "Z"] = m;
-    // Construire une date en UTC puis appliquer l'offset
     const base = Date.UTC(+Y, +M - 1, +D, +h, +min, +s);
     if (tz === "Z" || !tz) return new Date(base);
-
     const sign = tz.startsWith("-") ? -1 : 1;
     const [th, tm] = tz.slice(1).split(":").map(Number);
     const offsetMs = sign * (th * 60 + tm) * 60 * 1000;
@@ -425,55 +425,21 @@
   const h = document.getElementById("h");
   const m = document.getElementById("m");
   const s = document.getElementById("s");
-
-  // Optionnel: message le jour J
-  const afterCountContainer = document.querySelector(".after-count");
-  let celebrationMsgEl = document.getElementById("celebrationMsg");
-  if (!celebrationMsgEl) {
-    celebrationMsgEl = document.createElement("span");
-    celebrationMsgEl.id = "celebrationMsg";
-    celebrationMsgEl.style.fontWeight = "600";
-    celebrationMsgEl.style.display = "none";
-    celebrationMsgEl.textContent = "🎉 C’est le grand jour !";
-    afterCountContainer?.prepend(celebrationMsgEl);
-  }
-
   const TARGET = parseDateISO(CONFIG.dateISO);
 
   function two(n){ return String(n).padStart(2,"0"); }
-
   function tick() {
     const now = Date.now();
     const total = TARGET.getTime() - now;
-
-    // Affiche le bloc (au cas où)
     elCount.hidden = false;
-
-    if (total <= 0) {
-      d.textContent = "00";
-      h.textContent = "00";
-      m.textContent = "00";
-      s.textContent = "00";
-      celebrationMsgEl.style.display = "inline";
-      clearInterval(timer);
-      return;
-    }
-
+    if (total <= 0) { d.textContent = h.textContent = m.textContent = s.textContent = "00"; return; }
     const days = Math.floor(total / (1000 * 60 * 60 * 24));
     const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
     const mins  = Math.floor((total / (1000 * 60)) % 60);
     const secs  = Math.floor((total / 1000) % 60);
-
-    d.textContent = two(days);
-    h.textContent = two(hours);
-    m.textContent = two(mins);
-    s.textContent = two(secs);
+    d.textContent = two(days); h.textContent = two(hours); m.textContent = two(mins); s.textContent = two(secs);
   }
-
-  // Premier affichage + intervalle régulier
-  tick();
-  const timer = setInterval(tick, 1000);
-
+  tick(); const timer = setInterval(tick, 1000);
 
   // RSVP (mailto)
   const form = document.getElementById("rsvpForm");
@@ -488,13 +454,11 @@
     window.location.href = `mailto:${CONFIG.rsvp.to}?subject=${subject}&body=${body}`;
   });
 
-  // ===== Slider : flèches + drag (1 slide = largeur visible) =====
+  // Slider (flèches + drag + snap)
   const wrap = document.getElementById('sliderWrap');
   const prev = document.getElementById('prev');
   const next = document.getElementById('next');
-
-  function step(){ return wrap.clientWidth; } // défile d'une vue complète
-
+  function step(){ return wrap.clientWidth; }
   function updateButtons(){
     prev.disabled = wrap.scrollLeft <= 0;
     const max = wrap.scrollWidth - wrap.clientWidth - 1;
@@ -505,19 +469,14 @@
   wrap.addEventListener('scroll', updateButtons);
   window.addEventListener('resize', updateButtons);
   updateButtons();
-
-  // Drag (desktop & mobile) + snap à la slide la plus proche
   let isDown=false, startX=0, startLeft=0;
   const start = (x)=>{ isDown=true; startX=x; startLeft=wrap.scrollLeft; wrap.style.scrollSnapType='none'; };
   const move = (x)=>{ if(!isDown) return; wrap.scrollLeft = startLeft - (x-startX); };
   const end = ()=>{ 
-    if(!isDown) return; 
-    isDown=false; 
-    const w = step();
-    const target = Math.round(wrap.scrollLeft / w) * w;
+    if(!isDown) return; isDown=false;
+    const w = step(); const target = Math.round(wrap.scrollLeft / w) * w;
     wrap.style.scrollSnapType='x mandatory';
-    wrap.scrollTo({left: target, behavior:'smooth'});
-    setTimeout(updateButtons, 300);
+    wrap.scrollTo({left: target, behavior:'smooth'}); setTimeout(updateButtons, 300);
   };
   wrap.addEventListener('mousedown', e=>start(e.clientX));
   window.addEventListener('mousemove', e=>move(e.clientX));
