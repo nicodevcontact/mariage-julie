@@ -9,7 +9,7 @@
 
   <!-- Open Graph -->
   <meta property="og:title" content="Mariage – Julie & Franck">
-  <meta property="og:description" content="Toutes les infos : RSVP, accès, hébergements et photos.">
+  <meta property="og:description" content="Toutes les infos : cérémonie, vin d'honneur, RSVP, accès, hébergements et photos.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="img/chateau.jpg">
 
@@ -164,9 +164,7 @@
     label{font-size:.92rem;color:var(--muted);display:block;margin:6px 0 2px}
 
     /* Cartes Hébergements (mini-photo optionnelle) */
-    .stay{
-      display:flex; gap:14px; align-items:center;
-    }
+    .stay{display:flex; gap:14px; align-items:center;}
     .stay-thumb{
       flex:0 0 64px; width:64px; height:64px; border-radius:12px; overflow:hidden;
       border:1px solid var(--border); box-shadow:var(--shadow-soft); background:#f8f6f5;
@@ -242,27 +240,26 @@
       </div>
       <div class="grid grid-3">
         <div class="card">
-          <strong style="color:var(--primary)">Accès</strong>
-          <ul style="padding-left:18px;margin:.5rem 0">
-            <li>~1h25 depuis Paris</li>
-            <li>Parking sur place (suivez le fléchage)</li>
-            <li>VTC/taxi : anticipez le retour (fin tardive)</li>
-          </ul>
-          <a class="btn" id="mapsBtn2" target="_blank" rel="noreferrer">M’y rendre</a>
+          <strong style="color:var(--primary)">Cérémonie – 14h30</strong>
+          <p style="margin:.4rem 0 .6rem"><em>Église Notre-Dame d’Arlanc</em></p>
+          <a class="btn" id="mapsChurch" target="_blank" rel="noreferrer">Itinéraire église</a>
         </div>
         <div class="card">
-          <strong style="color:var(--primary)">Détails du jour</strong>
-          <ul style="padding-left:18px;margin:.5rem 0">
-            <li>Cérémonie et cocktail en extérieur (plan B si météo capricieuse).</li>
-            <li>Dress code : chic décontracté (talonettes conseillées si pelouse).</li>
-            <li>Enfants bienvenus — précisez l’âge dans le RSVP.</li>
-          </ul>
+          <strong style="color:var(--primary)">Vin d’honneur – 16h30</strong>
+          <p style="margin:.4rem 0 .6rem"><em>Château de la Reynerie</em><br><small id="venueAddr">63580 Le Vernet-Chaméane</small></p>
+          <a class="btn" id="mapsBtn2" target="_blank" rel="noreferrer">Itinéraire château</a>
         </div>
         <div class="card">
           <strong style="color:var(--primary)">Contacts</strong>
-          <p>📞 <span id="phoneTxt">+33 6 12 34 56 78</span><br>
-             ✉️ <a id="emailTxt"></a></p>
+          <p>
+            📞 <span id="phone1"></span><br>
+            📞 <span id="phone2"></span><br>
+            ✉️ <a id="emailTxt"></a>
+          </p>
           <small class="muted">Merci de privilégier les SMS.</small>
+          <!-- Adresse postale privée (non affichée par défaut pour confidentialité)
+          <p style="margin-top:.6rem"><small>79 avenue de l’Europe – 92400 Courbevoie</small></p>
+          -->
         </div>
       </div>
     </div>
@@ -301,7 +298,6 @@
     <div class="container">
       <div class="section-title">
         <h2 style="font-family:'Great Vibes',cursive;font-size:42px;color:var(--primary);margin:0 0 6px">Hébergement</h2>
-        <div class="small" style="color:var(--muted)">À proximité du lieu</div>
       </div>
 
       <div class="grid grid-3">
@@ -410,21 +406,33 @@
 </main>
 
 <footer>
-  <div class="container" id="footerTxt">Château de la Reynerie • Adresse exacte</div>
+  <div class="container" id="footerTxt">Château de la Reynerie • 63580 Le Vernet-Chaméane</div>
 </footer>
 
 <script>
   // ===== CONFIG =====
   const CONFIG = {
     couple: { bride: "Julie Derobert", groom: "Franck Marion" },
+    // Samedi 1er août 2026 – cérémonie à 14:30
     dateISO: "2026-08-01T14:30:00+02:00",
-    location: {
-      venue: "Château de la Reynerie",
-      address: "Adresse exacte à renseigner",
-      mapsUrl: "https://maps.google.com/?q=Ch%C3%A2teau+de+la+Reynerie",
+    locations: {
+      church: {
+        name: "Église Notre-Dame d’Arlanc",
+        time: "14:30",
+        mapsUrl: "https://maps.google.com/?q=%C3%89glise%20Notre%20Dame%20d%27Arlanc"
+      },
+      venue: {
+        name: "Château de la Reynerie",
+        time: "16:30",
+        address: "63580 Le Vernet-Chaméane",
+        mapsUrl: "https://maps.google.com/?q=Ch%C3%A2teau%20de%20la%20Reynerie%2063580%20Le%20Vernet-Cham%C3%A9ane"
+      }
     },
-    contact: { email: "contact@mariage-exemple.fr", phone: "+33 6 12 34 56 78" },
-    rsvp: { to: "contact@mariage-exemple.fr", subject: "RSVP – Mariage" },
+    contact: {
+      phones: ["+33 6 13 75 47 27", "+33 6 51 44 84 71"],
+      email: "contact@mariage-exemple.fr" // remplace si vous avez l'adresse officielle
+    },
+    rsvp: { to: "contact@mariage-exemple.fr", subject: "RSVP – Mariage Julie & Franck" }
   };
 
   // Header + burger
@@ -443,22 +451,35 @@
     hamb.setAttribute("aria-expanded","false");
   }));
 
-  // Text inject
+  // Text inject (HERO)
   const dateObj = new Date(CONFIG.dateISO);
   const dateLong = dateObj.toLocaleDateString("fr-FR",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
-  const time = dateObj.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
   const lines = document.getElementById("eventLines");
   lines.innerHTML = `
     <div class="line"><strong>Date :</strong> ${dateLong}</div>
-    <div class="line"><strong>Heure :</strong> ${time}</div>
-    <div class="line"><strong>Lieu :</strong> ${CONFIG.location.venue}</div>
+    <div class="line"><strong>Cérémonie :</strong> ${CONFIG.locations.church.time} – ${CONFIG.locations.church.name}</div>
+    <div class="line"><strong>Vin d’honneur :</strong> ${CONFIG.locations.venue.time} – ${CONFIG.locations.venue.name}</div>
+    <div class="line"><strong>Adresse :</strong> ${CONFIG.locations.venue.address}</div>
   `;
-  document.getElementById("mapsBtn").href = CONFIG.location.mapsUrl;
-  document.getElementById("mapsBtn2").href = CONFIG.location.mapsUrl;
-  document.getElementById("phoneTxt").textContent = CONFIG.contact.phone;
+  document.getElementById("venueAddr").textContent = CONFIG.locations.venue.address;
+  document.getElementById("mapsBtn").href = CONFIG.locations.venue.mapsUrl;
+  document.getElementById("mapsBtn2").href = CONFIG.locations.venue.mapsUrl;
+  document.getElementById("mapsChurch").href = CONFIG.locations.church.mapsUrl;
+
+  // Contacts
+  document.getElementById("phone1").textContent = CONFIG.contact.phones[0] || "";
+  document.getElementById("phone2").textContent = CONFIG.contact.phones[1] || "";
   const emailTxt = document.getElementById("emailTxt");
-  if(emailTxt){ emailTxt.textContent = CONFIG.contact.email; emailTxt.href = `mailto:${CONFIG.contact.email}`; }
-  document.getElementById("footerTxt").textContent = `${CONFIG.location.venue} • ${CONFIG.location.address}`;
+  if (CONFIG.contact.email && emailTxt){
+    emailTxt.textContent = CONFIG.contact.email;
+    emailTxt.href = `mailto:${CONFIG.contact.email}`;
+  } else if (emailTxt) {
+    emailTxt.closest("p").removeChild(emailTxt);
+  }
+
+  // Footer
+  document.getElementById("footerTxt").textContent =
+    `${CONFIG.locations.venue.name} • ${CONFIG.locations.venue.address}`;
 
   // ===== Countdown =====
   function parseDateISO(iso) {
@@ -498,7 +519,9 @@
   const mailBtn = document.getElementById("mailtoRSVP");
   const mailFallback = document.getElementById("mailtoFallback");
   const subject = encodeURIComponent(CONFIG.rsvp.subject);
-  const body = encodeURIComponent("Merci d’indiquer :\n- Nom et prénom\n- Nombre d’invités\n- Régimes/allergies éventuels\n- Message");
+  const body = encodeURIComponent(
+    "Merci d’indiquer :\n- Nom et prénom\n- Nombre d’invités\n- Régimes/allergies éventuels\n- Message"
+  );
   const mailHref = `mailto:${CONFIG.rsvp.to}?subject=${subject}&body=${body}`;
   mailBtn.href = mailHref;
   if (mailFallback){ mailFallback.textContent = CONFIG.rsvp.to; mailFallback.href = `mailto:${CONFIG.rsvp.to}`; }
