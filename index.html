@@ -85,7 +85,7 @@
     }
     .card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.08)}
 
-    /* HERO avec overlay + plaque titre (lisibilité conservée) */
+    /* HERO (lisibilité conservée) */
     .hero{
       position:relative;overflow:hidden;min-height:58vh;display:flex;align-items:center;justify-content:center;text-align:center;
       background: url("img/chateau.jpg") center/cover no-repeat;
@@ -140,7 +140,7 @@
 
     section{padding:56px 0}
     .section-title{text-align:center;margin-bottom:16px}
-    #rsvp .container-narrow{max-width:680px;margin:0 auto}
+    #rsvp .container-narrow{max-width:900px;margin:0 auto}
 
     .grid{display:grid;gap:16px}
     @media (min-width:900px){ .grid-3{grid-template-columns:repeat(3,1fr)} .grid-2{grid-template-columns:repeat(2,1fr)} }
@@ -163,7 +163,7 @@
     input:focus,textarea:focus,select:focus{outline:none;border-color:color-mix(in oklab, var(--primary) 35%, white);box-shadow:0 0 0 4px color-mix(in oklab, var(--primary) 18%, white)}
     label{font-size:.92rem;color:var(--muted);display:block;margin:6px 0 2px}
 
-    /* Cartes Hébergements (mini-photo optionnelle) */
+    /* Hébergements */
     .stay{display:flex; gap:14px; align-items:center;}
     .stay-thumb{
       flex:0 0 64px; width:64px; height:64px; border-radius:12px; overflow:hidden;
@@ -172,6 +172,16 @@
     .stay-thumb img{width:100%;height:100%;object-fit:cover}
     .stay-body{flex:1 1 auto}
     .stay-body small{color:var(--muted)}
+
+    /* RSVP – layout 2 colonnes propre */
+    .rsvp-card{ padding:28px; border-radius:18px; background:var(--panel); border:1px solid var(--border); box-shadow:var(--shadow); }
+    .rsvp-grid{ display:grid; gap:24px; align-items:center; }
+    @media (min-width:900px){ .rsvp-grid{ grid-template-columns: 1.3fr .9fr; } }
+    .rsvp-list{ margin:0; padding:0; list-style:none; line-height:1.9; color:var(--fg); }
+    .rsvp-list li::before{ content:"•"; margin-right:.6rem; color:var(--primary); }
+    .rsvp-cta{ text-align:center; }
+    .rsvp-cta .btn{ font-size:1rem; padding:1rem 1.4rem; }
+    .rsvp-help{ margin-top:.75rem; color:var(--muted); font-size:.9rem; }
   </style>
 </head>
 <body>
@@ -216,7 +226,7 @@
     </div>
   </section>
 
-  <!-- RSVP (formulaire supprimé -> mailto) -->
+  <!-- RSVP (mailto avec instructions, 2 colonnes) -->
   <section id="rsvp">
     <div class="container container-narrow">
       <div class="section-title">
@@ -224,10 +234,25 @@
         <div class="small" style="color:var(--muted)">Merci de confirmer avant le 15 mars</div>
       </div>
 
-      <div class="card" style="text-align:center">
-        <p style="margin:.2rem 0 .8rem">Cliquez pour ouvrir votre messagerie :</p>
-        <a id="mailtoRSVP" class="btn btn-primary" href="#">Envoyer un mail</a>
-        <p style="margin:.8rem 0 0"><small class="muted">Si le bouton ne fonctionne pas : <a id="mailtoFallback"></a></small></p>
+      <div class="rsvp-card">
+        <div class="rsvp-grid">
+          <div>
+            <p style="margin:0 0 .6rem; color:var(--fg); text-align:left;">Merci de préciser dans votre mail :</p>
+            <ul class="rsvp-list">
+              <li>Nom et prénom</li>
+              <li>Nombre d’adultes et d’enfants</li>
+              <li>Allergies ou régimes particuliers</li>
+              <li>Message (optionnel)</li>
+            </ul>
+          </div>
+
+          <div class="rsvp-cta">
+            <a id="mailtoRSVP" class="btn btn-primary" href="#">Envoyer un mail</a>
+            <div class="rsvp-help">
+              Si le bouton ne fonctionne pas : <a id="mailtoFallback"></a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -257,7 +282,7 @@
             ✉️ <a id="emailTxt"></a>
           </p>
           <small class="muted">Merci de privilégier les SMS.</small>
-          <!-- Adresse postale privée (non affichée par défaut pour confidentialité)
+          <!-- Adresse postale privée (non affichée par défaut)
           <p style="margin-top:.6rem"><small>79 avenue de l’Europe – 92400 Courbevoie</small></p>
           -->
         </div>
@@ -293,7 +318,7 @@
     </div>
   </section>
 
-  <!-- HÉBERGEMENT (placé tout en bas, sous les photos) -->
+  <!-- HÉBERGEMENT -->
   <section id="hebergement">
     <div class="container">
       <div class="section-title">
@@ -413,8 +438,7 @@
   // ===== CONFIG =====
   const CONFIG = {
     couple: { bride: "Julie Derobert", groom: "Franck Marion" },
-    // Samedi 1er août 2026 – cérémonie à 14:30
-    dateISO: "2026-08-01T14:30:00+02:00",
+    dateISO: "2026-08-01T14:30:00+02:00", // Samedi 1er août 2026 – 14h30
     locations: {
       church: {
         name: "Église Notre-Dame d’Arlanc",
@@ -430,9 +454,9 @@
     },
     contact: {
       phones: ["+33 6 13 75 47 27", "+33 6 51 44 84 71"],
-      email: "contact@mariage-exemple.fr" // remplace si vous avez l'adresse officielle
+      email: "contact@mariage-exemple.fr" // <-- remplace ici par l'adresse officielle
     },
-    rsvp: { to: "contact@mariage-exemple.fr", subject: "RSVP – Mariage Julie & Franck" }
+    rsvp: { to: "contact@mariage-exemple.fr", subject: "RSVP – Mariage Julie & Franck" } // <-- et ici si besoin
   };
 
   // Header + burger
@@ -515,12 +539,16 @@
   }
   tick(); const timer = setInterval(tick, 1000);
 
-  // RSVP (mailto uniquement)
+  // RSVP (mailto avec contenu pré-rempli)
   const mailBtn = document.getElementById("mailtoRSVP");
   const mailFallback = document.getElementById("mailtoFallback");
   const subject = encodeURIComponent(CONFIG.rsvp.subject);
   const body = encodeURIComponent(
-    "Merci d’indiquer :\n- Nom et prénom\n- Nombre d’invités\n- Régimes/allergies éventuels\n- Message"
+    "Merci d’indiquer :\n" +
+    "- Nom et prénom\n" +
+    "- Nombre d’adultes et d’enfants\n" +
+    "- Allergies ou régimes particuliers\n" +
+    "- Message (optionnel)"
   );
   const mailHref = `mailto:${CONFIG.rsvp.to}?subject=${subject}&body=${body}`;
   mailBtn.href = mailHref;
